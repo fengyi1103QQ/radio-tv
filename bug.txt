@@ -1,0 +1,35 @@
+1 ChatModel 展示的时候，需要用户自己在View层判断当前的ID 为那种用户类型；
+
+如果网络不好，就算已经加载了会话列表，对应的联系人和群组名字和图像也显示不出来。
+
+
+2 联系人个人信息数据字段不全，需要重新拉去，很多的如图片名字等字段不统一；
+
+3 目前的这种编译库，问题跟踪不清晰；
+
+4 发送一条消息，需要自己先保存，然后才能实现会话列表更新
+
+5 设置未读，需要传递self.setReadID，取的方法； 最好未读能在sdk做了。
+
+self.setReadID = message.messageID ;
+
+消息的最后一条messageID
+
+下一页出要传递，的getHistoryByLastMsgID取法
+self.lastMsgID，第一项的messageID
+if (oldIndex ==0) {
+     self.lastMsgID = message.messageID;
+ }
+10 系统消息 ，传递的是最后一条数据的时间毫秒数作为，下一页的开始
+   设置系统已读
+
+6 会话列表 系统消息，后推出来，影响界面效果；
+
+7 系统消息列表
+    NSString *time = [NSString stringWithFormat:@"%lld",[_time longLongValue]-1] ;
+    [self downLoadData:_typeMsg Time:time];
+
+8 ContactModel sdk返回的结构体和Myself的结构体一样，有很多冗余结结构体。
+
+9 有的时候在获取个人信息、群设置信息时候，sdk数据获取不到，就死机。
+
